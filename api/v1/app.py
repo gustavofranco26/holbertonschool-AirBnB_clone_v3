@@ -5,9 +5,8 @@ Flask App start web apication that integrates with AirBnB static HTML
 
 from api.v1.views import app_views
 from models import storage
-from flask import Flask
+from flask import Flask, make_response, jsonify
 from os import getenv
-from flask import make_response, jsonify
 import os
 
 app = Flask(__name__)
@@ -29,7 +28,7 @@ def teardown_db(exception):
 @app.errorhandler(404)
 def not_found(self):
     """Handlerror 404 - Not found"""
-    return jsonify({"error": "Not found"})
+    return jsonify({'error': 'Not found'})
 
 
 if __name__ == "__main__":
