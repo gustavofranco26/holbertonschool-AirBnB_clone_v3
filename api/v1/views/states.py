@@ -11,10 +11,7 @@ def get_states():
     """
     Retrieves the list of all State objects
     """
-<<<<<<< HEAD
     print("aquí")
-=======
->>>>>>> 0eb56ea1496df9fb109341a0ec3b74c8a7e46ca3
     all_states = storage.all(State).values()
     list_states = []
     for state in all_states:
