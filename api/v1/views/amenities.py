@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-The script that start a Flask web application
+The script that start a Flask web application with all methods default
 """
 
 
@@ -14,7 +14,9 @@ app = Flask(__name__)
 
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def get_amenities():
-    """Retrieves the list of all Amenity objects"""
+    """
+    Retrieves the list of all Amenity objects
+    """
     amenities = storage.all(Amenity)
     amenities_list = []
     for amenity in amenities.values():
@@ -25,7 +27,9 @@ def get_amenities():
 @app_views.route('/amenities/<amenity_id>', methods=['GET'],
                  strict_slashes=False)
 def get_amenity(amenity_id=None):
-    """Retrieves a Amenity object with the id linked to it"""
+    """
+    Retrieves a Amenity object with the id linked to it
+    """
     amenity = storage.get(Amenity, amenity_id)
     if amenity is None:
         abort(404)
@@ -36,7 +40,9 @@ def get_amenity(amenity_id=None):
 @app_views.route('/amenities/<amenity_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_amenity(amenity_id=None):
-    """Deletes a Amenity object"""
+    """
+    Deletes a Amenity object
+    """
     obj = storage.get(Amenity, amenity_id)
     if obj is None:
         abort(404)
@@ -48,7 +54,9 @@ def delete_amenity(amenity_id=None):
 
 @app_views.route('/amenities', methods=['POST'], strict_slashes=False)
 def post_amenity():
-    """Creates a Amenity"""
+    """
+    Creates a Amenity
+    """
     result = request.get_json()
     if not result:
         abort(400, {"Not a JSON"})
@@ -63,7 +71,9 @@ def post_amenity():
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
                  strict_slashes=False)
 def put_amenity(amenity_id=None):
-    """Updates a Amenity object"""
+    """
+    Updates a Amenity object
+    """
     result = request.get_json()
     if not result:
         abort(400, {"Not a JSON"})
