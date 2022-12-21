@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""The script that start a Flask web application"""
+"""
+The script that start a Flask web application
+"""
 
 
 from flask import Flask, jsonify, abort, request
