@@ -6,20 +6,28 @@ from models import storage
 from models.user import User
 
 
-@app_views.route('/users/', methods=['GET'], strict_slashes=False)
-@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
-def users_get(user_id=None):
-    """return user by id or all users"""
-    if user_id is None:
-        users = storage.all('User')
-        list_users = []
-        for user in users.values():
-            list_users.append(user.to_dict())
-        return jsonify(list_users)
+@app_views.route('/users', methods=['GET'], strict_slashes=False)
+def get_users():
+    """
+    Retrieves the list of all User objects
+    """
+    users = storage.all(User)
+    users_list = []
+    for user in users.values():
+        users_list.append(user.to_dict())
+    return jsonify(users_list)
+
+
+@app_views.route('/users/<user_id>', methods=['GET'],
+                 strict_slashes=False)
+def get_user(user_id=None):
+    """
+    Retrieves a User object with the id linked to it
+    """
+    user = storage.get(User, user_id)
+    if user is None:
+        abort(404)
     else:
-        user = storage.get('User', user_id)
-        if user is None:
-            abort(404)
         return jsonify(user.to_dict())
 
 
