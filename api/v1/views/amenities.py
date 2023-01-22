@@ -33,7 +33,7 @@ def get_amenity(amenity_id=None):
     if amenity is None:
         abort(404)
     else:
-        return jsonify(amenity.to_dict(), 200)
+        return jsonify(amenity.to_dict())
 
 
 @app_views.route('/amenities/<amenity_id>',
