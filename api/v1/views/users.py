@@ -31,15 +31,20 @@ def get_user(user_id=None):
         return jsonify(user.to_dict())
 
 
-@app_views.route('/users/<user_id>', methods=['DELETE'], strict_slashes=False)
-def users_delete(user_id=None):
-    """delete user by id"""
-    user = storage.get('User', user_id)
-    if user is None:
+@app_views.route('/users/<user_id>',
+                 methods=['DELETE'], strict_slashes=False)
+def delete_amenity(user_id=None):
+    """
+    Deletes a User object
+    """
+    obj = storage.get(User, user_id)
+    if obj is None:
         abort(404)
-    storage.delete(user)
-    storage.save()
-    return jsonify({}), 200
+    else:
+        storage.delete(obj)
+        storage.save()
+    return (jsonify({}), 200)
+
 
 
 @app_views.route('/users/', methods=['POST'], strict_slashes=False)
@@ -57,20 +62,21 @@ def users_post():
     return jsonify(new_user.to_dict()), 201
 
 
-@app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
-def users_put(user_id=None):
-    """update user obj"""
-    user = storage.get('User', user_id)
-    if user is None:
+@app_views.route('/users/<user_id>', methods=['PUT'],
+                 strict_slashes=False)
+def put_users(user_id=None):
+    """
+    Updates a User object
+    """
+    result = request.get_json()
+    if not result:
+        abort(400, {"Not a JSON"})
+    obj = storage.get(User, user_id)
+    if obj is None:
         abort(404)
-    response = request.get_json()
-    if response is None:
-        abort(400, description='Not a JSON')
-    response.pop('id', None)
-    response.pop('email', None)
-    response.pop('created_at', None)
-    response.pop('updated_at', None)
-    for key, value in response.items():
-        setattr(user, key, value)
+    invalid_keys = ["id", "created_at", "updated_at"]
+    for key, value in result.items():
+        if key not in invalid_keys:
+            setattr(obj, key, value)
     storage.save()
-    return jsonify(user.to_dict()), 200
+    return jsonify(obj.to_dict())
