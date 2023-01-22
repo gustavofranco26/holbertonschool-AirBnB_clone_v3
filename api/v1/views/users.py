@@ -33,7 +33,7 @@ def get_user(user_id=None):
 
 @app_views.route('/users/<user_id>',
                  methods=['DELETE'], strict_slashes=False)
-def delete_amenity(user_id=None):
+def delete_user(user_id=None):
     """
     Deletes a User object
     """
