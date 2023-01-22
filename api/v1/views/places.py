@@ -25,7 +25,7 @@ def get_places(city_id=None):
 
 
 @app_views.route('/places/<place_id>/', methods=['GET'], strict_slashes=False)
-def get_city(place_id):
+def get_place(place_id):
     """
     Retrieves a specific city based on id
     """
@@ -36,7 +36,7 @@ def get_city(place_id):
 
 
 @app_views.route('/places/<place_id>', methods=['DELETE'], strict_slashes=False)
-def delete_city(place_id):
+def delete_place(place_id):
     """
     Deletes a city object based on id provided
     """
@@ -52,7 +52,7 @@ def delete_city(place_id):
 
 @app_views.route('/cities/<city_id>/places', methods=['POST'],
                  strict_slashes=False)
-def post_city(city_id):
+def post_place(city_id):
     """
     Creates a City object
     """
@@ -72,7 +72,7 @@ def post_city(city_id):
 
 
 @app_views.route('/places/<place_id>', methods=['PUT'], strict_slashes=False)
-def put_city(place_id):
+def put_place(place_id):
     """
     Updates a City
     """
