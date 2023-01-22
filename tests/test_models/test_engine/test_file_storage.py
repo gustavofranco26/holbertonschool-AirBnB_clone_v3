@@ -14,6 +14,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from models import storage
 import json
 import os
 import pep8
@@ -67,6 +68,24 @@ test_file_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
+class TestFSstorage(unittest.TestCase):
+    """testin new methods in file storage"""
+
+    def test_count(self):
+        """test count method"""
+        count = storage.count()
+        dicti = {"name": 'test'}
+        self.new = State(**dicti)
+        self.new.save()
+        new_count = storage.count()
+        self.assertNotEqual(count, new_count)
+
+    def test_get(self):
+        """test get method"""
+        dicti = {"name": 'test'}
+        self.new = State(**dicti)
+        self.new.save()
+        self.assertEqual(storage.get('State', self.new.id), self.new)
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
