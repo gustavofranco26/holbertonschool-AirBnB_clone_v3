@@ -64,7 +64,7 @@ def post_amenity():
     obj = Amenity(name=result['name'])
     storage.new(obj)
     storage.save()
-    return jsonify(obj.to_dict())
+    return jsonify(obj.to_dict()), 201
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
