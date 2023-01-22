@@ -6,11 +6,12 @@ Flask App start web apication that integrates with AirBnB static HTML
 from api.v1.views import app_views
 from models import storage
 from flask import Flask, make_response, jsonify
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
 
-
+cors = CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 # Blueprint app_views register
 app.register_blueprint(app_views)
 
