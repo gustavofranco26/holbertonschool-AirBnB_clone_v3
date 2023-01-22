@@ -64,7 +64,7 @@ def post_amenity():
     obj = Amenity(name=result['name'])
     storage.new(obj)
     storage.save()
-    return jsonify(obj.to_dict(), 201)
+    return jsonify(obj.to_dict())
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
@@ -84,4 +84,4 @@ def put_amenity(amenity_id=None):
         if key not in invalid_keys:
             setattr(obj, key, value)
     storage.save()
-    return jsonify(obj.to_dict(), 200)
+    return jsonify(obj.to_dict())
