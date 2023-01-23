@@ -26,7 +26,8 @@ def get_reviews(place_id=None):
     return jsonify(reviews_list)
 
 
-@app_views.route('/reviews/<review_id>/', methods=['GET'], strict_slashes=False)
+@app_views.route('/reviews/<review_id>/', methods=['GET'],
+                 strict_slashes=False)
 def get_review(review_id):
     """
     Retrieves a specific city based on id
